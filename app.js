@@ -1,13 +1,27 @@
 const express = require("express");
+const {config} = require("dotenv");
+
+const sequelize = require("./config/databse");
+const {errorHandler} = require("./middlewares/errorHandler");
 
 const app = express();
 
-const PORT = 7000;
+// Body Parser
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
+
+
+// Error Handling
+app.use(errorHandler);
 
 app.get("/", (req, res)=> {
     res.status(200).json({message: "salam api"})
 })
 
+
+// Initial Server
+const PORT = process.env.PORT || 7000;
+
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT} in develop environment`)
+    console.log(`Server is running on port ${PORT} in ${process.env.NODE_ENV}`)
 })
