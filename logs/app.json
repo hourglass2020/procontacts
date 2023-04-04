@@ -96,3 +96,4 @@
 {"level":"info","message":"::1 - - [04/Apr/2023:10:06:16 +0000] \"GET /user/all HTTP/1.1\" 200 2521 \"-\" \"PostmanRuntime/7.31.1\"\n"}
 {"level":"info","message":"::1 - - [04/Apr/2023:10:09:15 +0000] \"POST /user/login HTTP/1.1\" 400 55 \"-\" \"PostmanRuntime/7.31.1\"\n"}
 {"level":"info","message":"::1 - - [04/Apr/2023:11:18:18 +0000] \"POST /user/login HTTP/1.1\" 500 35 \"-\" \"PostmanRuntime/7.31.1\"\n"}
+{"level":"info","message":"::1 - - [04/Apr/2023:11:19:08 +0000] \"POST /user/login HTTP/1.1\" 200 37 \"-\" \"PostmanRuntime/7.31.1\"\n"}
