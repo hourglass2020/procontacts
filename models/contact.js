@@ -45,8 +45,6 @@ const Contact = sequelize.define("Contact", {
 })
 
 Contact.belongsTo(User);
-User.hasMany(Contact, {
-    foreignKey: "phonebook"
-});
+User.hasMany(Contact);
 
 module.exports = Contact;

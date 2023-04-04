@@ -25,6 +25,7 @@ app.use(express.json());
 //? Routes
 // app.use(indexRoutes);
 app.use("/user", require("./routes/user"))
+app.use("/contact", require("./routes/contact"))
 
 //? Error Handling
 app.use(errorHandler);

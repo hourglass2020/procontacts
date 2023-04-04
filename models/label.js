@@ -4,7 +4,7 @@ const sequelize = require("../config/databse");
 
 const Contact = require("./contact");
 
-const Label = sequelize.define("Lable", {
+const Label = sequelize.define("Label", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
