@@ -1,0 +1,94 @@
+{
+  "date": "Tue Apr 04 2023 14:07:01 GMT+0430 (Iran Daylight Time)",
+  "error": {},
+  "exception": true,
+  "level": "error",
+  "message": "uncaughtException: winston.stream is not a function\nTypeError: winston.stream is not a function\n    at Object.<anonymous> (K:\\Pouria\\Project\\NodeJs Projects\\procontacts-api\\app.js:18:49)\n    at Module._compile (node:internal/modules/cjs/loader:1105:14)\n    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)\n    at Module.load (node:internal/modules/cjs/loader:981:32)\n    at Function.Module._load (node:internal/modules/cjs/loader:822:12)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)\n    at node:internal/main/run_main_module:17:47",
+  "os": {
+    "loadavg": [
+      0,
+      0,
+      0
+    ],
+    "uptime": 1391434
+  },
+  "process": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "K:\\Pouria\\Project\\NodeJs Projects\\procontacts-api\\app.js"
+    ],
+    "cwd": "K:\\Pouria\\Project\\NodeJs Projects\\procontacts-api",
+    "execPath": "C:\\Program Files\\nodejs\\node.exe",
+    "gid": null,
+    "memoryUsage": {
+      "arrayBuffers": 475241,
+      "external": 5145270,
+      "heapTotal": 33980416,
+      "heapUsed": 21574008,
+      "rss": 60919808
+    },
+    "pid": 16600,
+    "uid": null,
+    "version": "v16.16.0"
+  },
+  "stack": "TypeError: winston.stream is not a function\n    at Object.<anonymous> (K:\\Pouria\\Project\\NodeJs Projects\\procontacts-api\\app.js:18:49)\n    at Module._compile (node:internal/modules/cjs/loader:1105:14)\n    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)\n    at Module.load (node:internal/modules/cjs/loader:981:32)\n    at Function.Module._load (node:internal/modules/cjs/loader:822:12)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)\n    at node:internal/main/run_main_module:17:47",
+  "trace": [
+    {
+      "column": 49,
+      "file": "K:\\Pouria\\Project\\NodeJs Projects\\procontacts-api\\app.js",
+      "function": null,
+      "line": 18,
+      "method": null,
+      "native": false
+    },
+    {
+      "column": 14,
+      "file": "node:internal/modules/cjs/loader",
+      "function": "Module._compile",
+      "line": 1105,
+      "method": "_compile",
+      "native": false
+    },
+    {
+      "column": 10,
+      "file": "node:internal/modules/cjs/loader",
+      "function": "Module._extensions..js",
+      "line": 1159,
+      "method": ".js",
+      "native": false
+    },
+    {
+      "column": 32,
+      "file": "node:internal/modules/cjs/loader",
+      "function": "Module.load",
+      "line": 981,
+      "method": "load",
+      "native": false
+    },
+    {
+      "column": 12,
+      "file": "node:internal/modules/cjs/loader",
+      "function": "Module._load",
+      "line": 822,
+      "method": "_load",
+      "native": false
+    },
+    {
+      "column": 12,
+      "file": "node:internal/modules/run_main",
+      "function": "Function.executeUserEntryPoint [as runMain]",
+      "line": 77,
+      "method": "executeUserEntryPoint [as runMain]",
+      "native": false
+    },
+    {
+      "column": 47,
+      "file": "node:internal/main/run_main_module",
+      "function": null,
+      "line": 17,
+      "method": null,
+      "native": false
+    }
+  ]
+}
+{"level":"info","message":"::1 - - [04/Apr/2023:09:40:15 +0000] \"GET /user/all HTTP/1.1\" 200 2228 \"-\" \"PostmanRuntime/7.31.1\"\n"}

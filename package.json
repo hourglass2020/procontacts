@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node app",
-    "dev": "cross-env NODE_ENV=development nodemon app"
+    "dev": "cross-env NODE_ENV=development DEBUG=contacts-api nodemon app"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,9 @@
     "yup": "^1.0.2"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "debug": "^4.3.4",
+    "morgan": "^1.10.0",
+    "winston": "^3.8.2"
   }
 }

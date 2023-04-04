@@ -45,8 +45,7 @@ router.post("/register", async (req, res) => {
     } catch (err) {
         throw err;
     }
-
-})
+});
 
 
 module.exports = router;
