@@ -1,8 +1,45 @@
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 const {createError} = require("../utils/errorParser");
 const User = require("../models/user");
-const bcrypt = require("bcryptjs");
+
+exports.getUser = async (req, res, next) => {
+    try {
+        const userId = req.params.userId;
+        const user = await User.findByPk(Number(userId));
+
+        if (user === null) {
+            throw createError("there is not such a user.", 404);
+        }
+
+        res.status(200).json({user});
+    } catch (err) {
+        next(err);
+    }
+}
+
+exports.updateUser = async (req, res, next) => {
+    try {
+        const userId = req.params.userId;
+
+        const user = await User.findByPk(Number(userId));
+
+        if (user === null) {
+            throw createError("there is not such a user.", 404);
+        }
+
+        const tempUser = req.body.user;
+
+        user.fullName = tempUser.fullName;
+        await user.save();
+
+        res.status(200).json({message: "User is updated."});
+
+    } catch (err) {
+        next(err);
+    }
+}
 
 exports.createUser = async (req, res, next) => {
     try {
