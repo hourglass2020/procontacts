@@ -1,51 +1,45 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
 
+const userController = require("../controllers/userController");
 const User = require("../models/user");
+
 const {createError} = require("../utils/errorParser");
 
 const router = express.Router();
 
-router.get("/all", async (req, res) => {
-    try {
-        const users = await User.findAll();
 
-        res.status(200).json({users})
+// @desc    get all users
+// @route   GET /user/all
+router.get("/all", userController.getAllUsers)
 
-    } catch (err) {
-        throw err;
-    }
-})
+// @desc    create new user
+// @route   POST /user/register
+router.post("/register", userController.createUser);
 
-router.post("/register", async (req, res) => {
-
-    if (!req.body.user) {
-        const error = createError("There is no user's data", 401);
-        throw error;
-    }
-
-    let tempUser = req.body.user;
+// @desc    login handle
+// @route   POST /user/login
+router.post("/login", async (req, res, next) => {
+    const {password, email} = req.body;
 
     try {
-        const [user, created] = await User.findOrCreate({
-            where: {
-                email: tempUser.email
-            },
-            defaults: {
-                fullName: tempUser.fullName,
-                password: tempUser.password
-            }
-        });
+        const user = await User.findOne({where: {email}});
 
-        if (created) {
-            return res.status(201).json({message: "Successfully created!"});
+        if (user === null) {
+            throw createError("there is not such a user.", 404);
         }
 
-        return res.status(422).json({message: "This email is already used."});
+        let isEqual = await bcrypt.compare(password, user.password);
+
+        if (isEqual) {
+            return res.status(200).json({message: "Successfully logged in."});
+        }
+
+        throw createError("Password is not correct!", 422);
 
     } catch (err) {
-        throw err;
+        next(err);
     }
-});
-
+})
 
 module.exports = router;

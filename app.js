@@ -6,30 +6,30 @@ const {config} = require("dotenv");
 const sequelize = require("./config/databse");
 const {errorHandler} = require("./middlewares/errorHandler");
 
-// Load Config
+//? Load Config
 config({path: "./config/config.env"})
 const winston = require("./config/winston");
 
 const app = express();
 
-// Logging
+//? Logging
 if (process.env.NODE_ENV === "development") {
     debug("Morgan Enabled");
     app.use(morgan("combined", {stream: winston.stream}));
 }
 
-// Body Parser
+//? Body Parser
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-// Error Handling
-app.use(errorHandler);
-
-// Routes
+//? Routes
 // app.use(indexRoutes);
 app.use("/user", require("./routes/user"))
 
-// Initial Server
+//? Error Handling
+app.use(errorHandler);
+
+//? Initial Server
 const PORT = process.env.PORT || 7000;
 
 sequelize

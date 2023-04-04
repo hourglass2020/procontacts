@@ -4,9 +4,9 @@ const appRoot = require("app-root-path");
 const options = {
     File: {
         level: "info",
-        filename: `${appRoot}/logs/app.log`,
+        filename: `${appRoot}/logs/app.json`,
         handleExceptions: true,
-        format: winston.format.logstash(),
+        format: winston.format.json(),
         maxSize: 5000000,
         maxFile: 5
     },
