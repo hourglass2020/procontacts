@@ -1,4 +1,5 @@
 const {DataTypes} = require("sequelize");
+const bcrypt = require("bcryptjs");
 
 const sequelize = require("../config/databse");
 const {createError} = require("../utils/errorParser");
@@ -28,19 +29,17 @@ const User = sequelize.define("User", {
         type: DataTypes.STRING,
         allowNull: false
     }
-}, {
-    hooks: {
+},{
+    hooks:{
         beforeCreate(user, options) {
-            bcrypt.hash(user.password, 10, (err, hash) => {
-                if (err) {
-                    const error = createError("Problem in hashing password", 501);
-                    throw error;
-                }
-                user.password = hash;
-            })
+            if(user.isNewRecord){
+                const salt = bcrypt.genSaltSync();
+                const hash = bcrypt.hashSync(user.getDataValue("password"), salt);
+
+                user.setDataValue("password", hash);
+            }
         }
     }
 });
 
-
-module.exports = User
+module.exports = User;
