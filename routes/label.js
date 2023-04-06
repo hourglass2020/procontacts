@@ -2,31 +2,22 @@ const express = require("express");
 
 const Label = require("../models/label");
 const {createError} = require("../utils/errorParser");
+const {userAuthenticated} = require("../middlewares/userAuth");
+
+const labelController = require("../controllers/labelController");
 
 const router = express.Router();
 
-router.post("/add", async (req, res, next) => {
-    try {
-        const tempLabel = req.body.label;
-        const userId = req.body.userId;
+// @desc    add new label
+// @route   POST /labels/
+router.post("/", userAuthenticated, labelController.addLabel)
 
-        const [label, created] = await Label.findOrCreate({
-            where: {
-                name: tempLabel.name
-            },
-            defaults:{
-                UserId: userId
-            }
-        } );
+// @desc    update the label
+// @route   PUt /labels/:labelId
+// router.put("/:labelId", userAuthenticated, labelController.updateLabel)
 
-        if(created){
-            return res.status(201).json({message: "Successfully created!"});
-        }
-
-        throw createError("You have such a label", 422)
-    } catch (err) {
-        next(err);
-    }
-})
+// @desc    delete the label
+// @route   DELETE /labels/:labelId
+// router.post("/:labelId", userAuthenticated, labelController.deleteLabel)
 
 module.exports = router;

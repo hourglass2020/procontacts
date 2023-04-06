@@ -5,44 +5,25 @@ const Label = require("../models/label");
 const Contact = require("../models/contact");
 const {createError} = require("../utils/errorParser");
 
+const contactController = require("../controllers/contactController");
+const {userAuthenticated} = require("../middlewares/userAuth");
+
 const router = express.Router();
 
-router.post("/add", async (req, res, next) => {
-    try {
-        const userId = Number(req.body.userId);
-        const tempContact = req.body.contact;
+// @desc    add new contact
+// @route   POST /contacts
+router.post("/", userAuthenticated, contactController.addContact);
 
-        const contact = await Contact.create({
-            UserId:userId,
-            firstName: tempContact.firstName
-        });
+// @desc    add label for contact
+// @route   POST /contacts/add-label
+router.post("/add-label", userAuthenticated, contactController.addLabel);
 
-        res.status(200).json({message: "Successfully added!"});
+// @desc    add label for contact
+// @route   POST /contacts/add-label
+// router.put("/:contactId", userAuthenticated, contactController.updateContact);
 
-    } catch (err) {
-        next(err);
-    }
-})
-
-router.post("/add-label", async (req, res, next) => {
-    try {
-        const contact = await Contact.findByPk(Number(req.body.contactId));
-        if(contact === null){
-            throw createError("There is not any contact with this id", 404);
-        }
-
-        const label = await Label.findByPk(Number(req.body.labelId));
-        if(label === null){
-            throw createError("There is not any label with this id", 404);
-        }
-
-        await contact.addLabel(label);
-
-        res.status(200).json({message: "Successful!"});
-    }catch (err) {
-        next(err)
-    }
-})
-
+// @desc    add label for contact
+// @route   POST /contacts/add-label
+// router.delete("/:contactId", userAuthenticated, contactController.deleteContact);
 
 module.exports = router;
