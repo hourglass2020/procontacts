@@ -22,7 +22,6 @@ exports.getUser = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
     try {
         const userId = req.params.userId;
-
         const user = await User.findByPk(Number(userId));
 
         if (user === null) {
@@ -30,12 +29,26 @@ exports.updateUser = async (req, res, next) => {
         }
 
         const tempUser = req.body.user;
-
         user.fullName = tempUser.fullName;
+
         await user.save();
-
         res.status(200).json({message: "User is updated."});
+    } catch (err) {
+        next(err);
+    }
+}
 
+exports.deleteUser = async (req, res, next) => {
+    try {
+        const userId = req.userId;
+        const user = await User.findByPk(Number(userId));
+
+        if (user === null) {
+            throw createError("there is not such a user.", 404);
+        }
+
+        await user.destroy();
+        res.status(200).json({message: "User is deleted."});
     } catch (err) {
         next(err);
     }
@@ -63,7 +76,6 @@ exports.createUser = async (req, res, next) => {
             return res.status(201).json({message: "Successfully created!"});
         }
 
-        // return res.status(422).json({message: "This email is already used."});
         throw createError("This email is already used.", 422);
     } catch (err) {
         next(err);
