@@ -1,7 +1,9 @@
 const express = require("express");
 
 const User = require("../models/user");
+const Label = require("../models/label");
 const Contact = require("../models/contact");
+const {createError} = require("../utils/errorParser");
 
 const router = express.Router();
 
@@ -21,5 +23,26 @@ router.post("/add", async (req, res, next) => {
         next(err);
     }
 })
+
+router.post("/add-label", async (req, res, next) => {
+    try {
+        const contact = await Contact.findByPk(Number(req.body.contactId));
+        if(contact === null){
+            throw createError("There is not any contact with this id", 404);
+        }
+
+        const label = await Label.findByPk(Number(req.body.labelId));
+        if(label === null){
+            throw createError("There is not any label with this id", 404);
+        }
+
+        await contact.addLabel(label);
+
+        res.status(200).json({message: "Successful!"});
+    }catch (err) {
+        next(err)
+    }
+})
+
 
 module.exports = router;

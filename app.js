@@ -24,15 +24,15 @@ app.use(express.json());
 
 //? Routes
 // app.use(indexRoutes);
-app.use("/user", require("./routes/user"))
+app.use("/users", require("./routes/user"))
 app.use("/contact", require("./routes/contact"))
+app.use("/label", require("./routes/label"))
 
 //? Error Handling
 app.use(errorHandler);
 
 //? Initial Server
 const PORT = process.env.PORT || 7000;
-
 sequelize
     .sync()
     .then(result => {
