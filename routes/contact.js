@@ -20,10 +20,10 @@ router.post("/add-label", userAuthenticated, contactController.addLabel);
 
 // @desc    add label for contact
 // @route   POST /contacts/add-label
-// router.put("/:contactId", userAuthenticated, contactController.updateContact);
+router.put("/:contactId", userAuthenticated, contactController.updateContact);
 
 // @desc    add label for contact
 // @route   POST /contacts/add-label
-// router.delete("/:contactId", userAuthenticated, contactController.deleteContact);
+router.delete("/:contactId", userAuthenticated, contactController.deleteContact);
 
 module.exports = router;
