@@ -14,10 +14,10 @@ router.post("/", userAuthenticated, labelController.addLabel)
 
 // @desc    update the label
 // @route   PUt /labels/:labelId
-// router.put("/:labelId", userAuthenticated, labelController.updateLabel)
+router.put("/:labelId", userAuthenticated, labelController.updateLabel)
 
 // @desc    delete the label
 // @route   DELETE /labels/:labelId
-// router.post("/:labelId", userAuthenticated, labelController.deleteLabel)
+router.delete("/:labelId", userAuthenticated, labelController.deleteLabel)
 
 module.exports = router;
