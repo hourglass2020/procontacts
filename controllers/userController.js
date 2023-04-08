@@ -4,10 +4,14 @@ const bcrypt = require("bcryptjs");
 const {createError} = require("../utils/errorParser");
 const User = require("../models/user");
 
+
+// * Checked!
 exports.getUser = async (req, res, next) => {
     try {
-        const userId = req.params.userId;
-        const user = await User.findByPk(Number(userId));
+        const userId = req.userId;
+        const user = await User.findByPk(Number(userId),{
+            attributes:["fullName", "email","createdAt","updatedAt"]
+        });
 
         if (user === null) {
             throw createError("there is not such a user.", 404);
@@ -19,9 +23,10 @@ exports.getUser = async (req, res, next) => {
     }
 }
 
+// * Checked!
 exports.updateUser = async (req, res, next) => {
     try {
-        const userId = req.params.userId;
+        const userId = req.userId;
         const user = await User.findByPk(Number(userId));
 
         if (user === null) {
@@ -38,9 +43,11 @@ exports.updateUser = async (req, res, next) => {
     }
 }
 
+// * Checked!
 exports.deleteUser = async (req, res, next) => {
     try {
         const userId = req.userId;
+        console.log(userId)
         const user = await User.findByPk(Number(userId));
 
         if (user === null) {
@@ -54,6 +61,7 @@ exports.deleteUser = async (req, res, next) => {
     }
 }
 
+// * Checked!
 exports.createUser = async (req, res, next) => {
     try {
         if (!req.body.user) {
@@ -82,6 +90,7 @@ exports.createUser = async (req, res, next) => {
     }
 }
 
+// * Checked!
 exports.handleLogin = async (req, res, next) => {
     const {password, email} = req.body;
 
@@ -110,14 +119,5 @@ exports.handleLogin = async (req, res, next) => {
 
     } catch (err) {
         next(err);
-    }
-}
-
-exports.getAllUsers = async (req, res) => {
-    try {
-        const users = await User.findAll();
-        res.status(200).json({users})
-    } catch (err) {
-        throw err;
     }
 }

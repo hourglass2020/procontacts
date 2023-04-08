@@ -19,7 +19,7 @@ exports.userAuthenticated = (req, res, next) => {
 
         const user = decodedToken.user ?? decodedToken;
 
-        req.useId = user.id;
+        req.userId = user.userId;
         next();
 
     } catch (err) {
