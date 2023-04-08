@@ -1,6 +1,6 @@
 const Contact = require("../models/contact");
-const {createError} = require("../utils/errorParser");
 const Label = require("../models/label");
+const {createError} = require("../utils/errorParser");
 
 // * Checked!
 exports.addContact = async (req, res, next) => {
@@ -67,6 +67,7 @@ exports.deleteContact = async (req, res, next) => {
     }
 }
 
+// * Checked!
 exports.addLabel = async (req, res, next) => {
     try {
         const contact = await Contact.findByPk(Number(req.body.contactId));
@@ -81,6 +82,25 @@ exports.addLabel = async (req, res, next) => {
 
         await contact.addLabel(label);
         res.status(201).json({message: "Successful!"});
+    } catch (err) {
+        next(err)
+    }
+}
+
+// * Checked!
+exports.getContacts = async (req, res, next) => {
+    try {
+        const contacts = await Contact.findAll({
+            where: {
+                UserId: req.userId
+            },
+            include: {
+                model: Label,
+                attributes: ["id", "name"]
+            }
+        });
+
+        res.status(200).json({contacts});
     } catch (err) {
         next(err)
     }

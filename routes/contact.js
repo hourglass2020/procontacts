@@ -10,6 +10,10 @@ const {userAuthenticated} = require("../middlewares/userAuth");
 
 const router = express.Router();
 
+// @desc    get all contacts
+// @route   GET /contacts
+router.get("/", userAuthenticated, contactController.getContacts);
+
 // @desc    add new contact
 // @route   POST /contacts
 router.post("/", userAuthenticated, contactController.addContact);
