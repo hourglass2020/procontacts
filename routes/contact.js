@@ -1,10 +1,5 @@
 const express = require("express");
 
-const User = require("../models/user");
-const Label = require("../models/label");
-const Contact = require("../models/contact");
-const {createError} = require("../utils/errorParser");
-
 const contactController = require("../controllers/contactController");
 const {userAuthenticated} = require("../middlewares/userAuth");
 
